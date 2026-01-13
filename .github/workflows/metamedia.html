@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>METAMEDIA NEWS - Breaking News Crypto Markets</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #000000;
+            color: #FFFFFF;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Ticker Bar */
+        .ticker-bar {
+            background-color: #000000;
+            padding: 12px 0;
+            overflow: hidden;
+            border-bottom: 1px solid #FF5722;
+        }
+
+        .ticker-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            white-space: nowrap;
+            animation: scroll 30s linear infinite;
+        }
+
+        .ticker-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .ticker-label {
+            color: #FFFFFF;
+        }
+
+        .ticker-change {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .ticker-change.positive {
+            color: #00C853;
+        }
+
+        .ticker-change.negative {
+            color: #F44336;
+        }
+
+        .ticker-change svg {
+            display: inline-block;
+        }
+
+        /* Separator Lines */
+        .separator {
+            height: 2px;
+            background-color: #FF5722;
+            width: 100%;
+        }
+
+        .separator.thick {
+            height: 3px;
+        }
+
+        /* Main Header */
+        .main-header {
+            background-color: #000000;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            line-height: 1;
+        }
+
+        .logo-metamedia {
+            font-size: 48px;
+            color: #FFFFFF;
+            text-transform: uppercase;
+        }
+
+        .logo-news {
+            font-size: 42px;
+            color: #F44336;
+            text-transform: uppercase;
+        }
+
+        .tagline {
+            font-size: 16px;
+            color: #FFFFFF;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            margin-top: 8px;
+        }
+
+        /* Navigation Bar */
+        .main-nav {
+            background-color: #000000;
+            padding: 20px 0;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            color: #FFFFFF;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            color: #F44336;
+        }
+
+        .nav-link.active {
+            color: #FFFFFF;
+        }
+
+        /* Main Content Area */
+        .main-content {
+            flex: 1;
+            background-color: #000000;
+            padding: 40px 20px;
+            min-height: 400px;
+        }
+
+        /* Footer */
+        .main-footer {
+            background-color: #000000;
+            padding: 30px 20px;
+            text-align: center;
+            border-top: 1px solid #333333;
+        }
+
+        .copyright {
+            font-size: 12px;
+            color: #CCCCCC;
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .disclaimer {
+            font-size: 11px;
+            color: #999999;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            letter-spacing: 0.3px;
+        }
+
+        /* Animation for ticker */
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .logo-metamedia {
+                font-size: 36px;
+            }
+            
+            .logo-news {
+                font-size: 32px;
+            }
+            
+            .tagline {
+                font-size: 14px;
+            }
+            
+            .nav-links {
+                gap: 30px;
+            }
+            
+            .nav-link {
+                font-size: 14px;
+            }
+            
+            .ticker-content {
+                gap: 25px;
+            }
+            
+            .ticker-item {
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-metamedia {
+                font-size: 28px;
+            }
+            
+            .logo-news {
+                font-size: 24px;
+            }
+            
+            .nav-links {
+                gap: 20px;
+                flex-direction: column;
+            }
+            
+            .ticker-content {
+                flex-direction: column;
+                gap: 15px;
+                animation: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Ticker Bar -->
+    <div class="ticker-bar">
+        <div class="ticker-content">
+            <div class="ticker-item">
+                <span class="ticker-label">3,726.03</span>
+                <span class="ticker-change positive">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                        <path d="M6 3L9 6L3 6L6 3Z" fill="#00C853"/>
+                    </svg>
+                    0.71%
+                </span>
+            </div>
+            <div class="ticker-item">
+                <span class="ticker-label">BRENT $84.87</span>
+                <span class="ticker-change negative">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                        <path d="M6 9L3 6L9 6L6 9Z" fill="#F44336"/>
+                    </svg>
+                    41%
+                </span>
+            </div>
+            <div class="ticker-item">
+                <span class="ticker-label">BTC $104,400.01</span>
+                <span class="ticker-change positive">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                        <path d="M6 3L9 6L3 6L6 3Z" fill="#00C853"/>
+                    </svg>
+                    0.80%
+                </span>
+            </div>
+            <div class="ticker-item">
+                <span class="ticker-label">SENSEX $77,725.05</span>
+                <span class="ticker-change positive">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                        <path d="M6 3L9 6L3 6L6 3Z" fill="#00C853"/>
+                    </svg>
+                    0.45%
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="separator"></div>
+
+    <!-- Main Header / Logo Section -->
+    <header class="main-header">
+        <div class="logo-container">
+            <h1 class="logo">
+                <span class="logo-metamedia">METAMEDIA</span>
+                <span class="logo-news">NEWS</span>
+            </h1>
+            <p class="tagline">Breaking News Crypto Markets</p>
+        </div>
+    </header>
+    <div class="separator thick"></div>
+
+    <!-- Navigation Bar -->
+    <nav class="main-nav">
+        <ul class="nav-links">
+            <li><a href="#" class="nav-link active">HOME</a></li>
+            <li><a href="#" class="nav-link">TECHNOLOGY</a></li>
+            <li><a href="#" class="nav-link">FINANCE</a></li>
+            <li><a href="#" class="nav-link">ENERGY</a></li>
+        </ul>
+    </nav>
+    <div class="separator"></div>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+        <!-- Content will go here -->
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <p class="copyright">© 2024 MetaMedia News All Rights Reserved</p>
+        <p class="disclaimer">Content is for informational and general information purposes only and does not constitute financial, investment, or trading advice.</p>
+    </footer>
+
+    <script>
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            initNavigation();
+            initTicker();
+        });
+
+        // Navigation functionality
+        function initNavigation() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    // Remove active class from all links
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    
+                    // Add active class to clicked link
+                    link.classList.add('active');
+                    
+                    // Get the section name
+                    const section = link.textContent.trim();
+                    console.log(`Navigating to: ${section}`);
+                    
+                    // Here you can add logic to load different content based on the section
+                    loadSectionContent(section);
+                });
+            });
+        }
+
+        // Load content for different sections
+        function loadSectionContent(section) {
+            const mainContent = document.querySelector('.main-content');
+            
+            // For now, just log the section
+            // You can expand this to load actual content
+            console.log(`Loading content for: ${section}`);
+            
+            // Example: You could fetch content here
+            // mainContent.innerHTML = `<h2>${section} Content</h2>`;
+        }
+
+        // Ticker functionality (if you want to make it more dynamic)
+        function initTicker() {
+            const tickerContent = document.querySelector('.ticker-content');
+            
+            // You can add logic here to fetch real-time data
+            // and update the ticker values
+            
+            // Example: Update ticker values periodically
+            // setInterval(() => {
+            //     updateTickerData();
+            // }, 5000);
+        }
+
+        // Function to update ticker data (example)
+        function updateTickerData() {
+            // This would typically fetch real data from an API
+            // For now, it's just a placeholder
+            console.log('Updating ticker data...');
+        }
+    </script>
+</body>
+</html>
